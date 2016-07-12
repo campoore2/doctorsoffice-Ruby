@@ -8,7 +8,7 @@ class Doctor
   end
 
   define_singleton_method(:all) do
-    returned_doctors = DB.exec('SELECT * FROM doctors;')
+    returned_doctors = DB.exec('SELECT * FROM doctors ORDER BY name;')
     doctors = []
     returned_doctors.each() do |doctor|
       name = doctor.fetch('name')

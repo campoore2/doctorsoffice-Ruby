@@ -12,6 +12,7 @@ get('/') do
 end
 
 get('/add') do
+  @doctors = Doctor.all()
   erb(:add)
 end
 
@@ -24,6 +25,7 @@ post('/add/doctor') do
   spec = params.fetch('doctor_spec')
   dr = Doctor.new({:name => name, :spec => spec})
   dr.save()
+  @doctors = Doctor.all()
   erb(:add)
 end
 
@@ -43,6 +45,7 @@ post('/add') do
   doctor_id = params.fetch('doctor').to_i()
   patient = Patient.new({:name => patient_name, :dob => dob, :doctor_id => doctor_id})
   patient.save()
+  @doctors = Doctor.all()
   erb(:add)
 end
 
