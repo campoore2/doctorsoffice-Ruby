@@ -5,7 +5,7 @@
 <h3>I am:</h3>
 <ul>
   <% @doctors.each() do |doctor| %>
-  <li><%= doctor.name %></li>
+  <li>doctor name: <%= doctor.name %> number of patients: <%=   %></li>
   <% end %>
 </ul>
 <% else %>

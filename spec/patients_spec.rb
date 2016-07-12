@@ -40,4 +40,17 @@ describe(Patient) do
       expect(patient.id()).to(be_an_instance_of(Fixnum))
     end
   end
+  describe(".patient_count") do
+    it('count how many patients a doctor has') do
+      patient1 = Patient.new({:name => 'Matt', :dob => '4/3/1911', :doctor_id => 3 })
+      patient2 = Patient.new({:name => 'Matt', :dob => '4/3/1911', :doctor_id => 1 })
+      patient3 = Patient.new({:name => 'Matt', :dob => '4/3/1911', :doctor_id => 1 })
+      patient4 = Patient.new({:name => 'Matt', :dob => '4/3/1911', :doctor_id => 1 })
+      patient1.save()
+      patient2.save()
+      patient3.save()
+      patient4.save()
+      expect(Patient.patient_count(1)).to(eq(3))
+    end
+  end
 end

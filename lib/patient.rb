@@ -52,4 +52,14 @@ class Patient
     end
     arr
   end
+
+  define_singleton_method(:patient_count) do |id|
+    pt = DB.exec("SELECT doctor_name FROM patients;")
+    new_pt = []
+    arr.each() do |element|
+      new_pt.push(element.fetch('doctor_name').to_i())
+    end
+    binding.pry
+    return new_pt.count(id)
+  end
 end

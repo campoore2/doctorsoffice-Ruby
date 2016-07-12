@@ -18,10 +18,12 @@ class Doctor
     end
     doctors
   end
+
   define_method(:save) do
     result = DB.exec("INSERT INTO doctors (name, spec) VALUES ('#{@name}', '#{@spec}') RETURNING id;")
     @id = result.first().fetch("id").to_i
   end
+
   define_singleton_method(:find) do |identification|
     Doctors.all().each() do |doctor|
       if doctors.id == identification
@@ -29,9 +31,11 @@ class Doctor
       end
     end
   end
+
   define_singleton_method(:delete) do |id|
     DB.exec("DELETE FROM doctors WHERE id = #{id}")
   end
+  
   define_method(:==) do |another_doctor|
     (self.name() == another_doctor.name()).&(self.id() == another_doctor.id())
   end
