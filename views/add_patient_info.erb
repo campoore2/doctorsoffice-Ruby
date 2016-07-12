@@ -1,0 +1,9 @@
+
+<form action="/add" method="post">
+  <input type="hidden" name="doctor" value="<%= @doctor_id %>"
+  <label for="patient_name">Patient Name</label>
+  <input type="text" name="patient_name" required>
+  <label for="dob">date of birth</label>
+  <input type="date" name="patient_dob" required>
+  <button type="submit">Add Patient</button>
+</form>

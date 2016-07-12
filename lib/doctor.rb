@@ -8,13 +8,13 @@ class Doctor
   end
 
   define_singleton_method(:all) do
-    returned_doctors = DB.exec('SELECT * FROM Doctors;')
+    returned_doctors = DB.exec('SELECT * FROM doctors;')
     doctors = []
     returned_doctors.each() do |doctor|
-      name = doctors.fetch('name')
-      spec = doctors.fetch('spec')
-      id = list.fetch('id').to_i
-      doctors.push(Doctors.new({:name => name, :spec => spec, :id => id}))
+      name = doctor.fetch('name')
+      spec = doctor.fetch('spec')
+      id = doctor.fetch('id').to_i
+      doctors.push(Doctor.new({:name => name, :spec => spec, :id => id}))
     end
     doctors
   end
@@ -30,7 +30,7 @@ class Doctor
     end
   end
   define_singleton_method(:delete) do |id|
-    DB.exec("DELETE FROM Doctors WHERE id = #{id}")
+    DB.exec("DELETE FROM doctors WHERE id = #{id}")
   end
   define_method(:==) do |another_doctor|
     (self.name() == another_doctor.name()).&(self.id() == another_doctor.id())

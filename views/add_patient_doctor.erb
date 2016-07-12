@@ -1,0 +1,14 @@
+<h1>add a patient</h1>
+
+<% if @doctors.any?() %>
+  <h3>Pick a doctor</h3>
+  <ul>
+    <% @doctors.each() do |doctor| %>
+      <li><a href="/add/patient_doctor/<%= doctor.id() %>/patient_info"><%= doctor.name %></a></li>
+    <% end %>
+  </ul>
+<% else %>
+  <h2>no doctors available</h2>
+<% end %>
+
+<a href="/add">back</a>

@@ -1,0 +1,13 @@
+<h1>Who are You?</h1>
+<% if @doctors.any?() %>
+<h3>I am:</h3>
+<ul>
+  <% @doctors.each() do |doctor| %>
+  <li><a href="/doctor/<%= doctor.id() %>/patients"><%= doctor.name %></a></li>
+  <% end %>
+</ul>
+<% else %>
+  <h2>We dont have any Doctors</h2>
+<% end %>
+
+<a href="/">Home</a>
