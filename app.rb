@@ -53,13 +53,14 @@ end
 
 get('/doctor/:id/patients') do
   @doctor = params.fetch('id').to_i()
-  @patients = Patient.find(@doctor)
+  @patients = Patient.find_doctor_id(@doctor)
   erb(:patients)
 end
 
 get('/doctors/:id/patients/:patient_id/patient_info') do
-  @patient_id = params.fetch('patient_id').to_i
-  @patient_name = params.fetch('patient_name')
-  @dob = params.fetch('patient_dob')
+  patient_id = params.fetch('patient_id').to_i
+  patient = Patient.find(patient_id)
+  @dob = patient.dob()
+  @name = patient.name()
   erb(:patient_info)
 end

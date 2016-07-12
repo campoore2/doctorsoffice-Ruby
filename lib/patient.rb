@@ -14,13 +14,14 @@ class Patient
   end
 
   define_singleton_method(:all) do
-    returned_patient = DB.exec('SELECT name, cast(dob AS date), doctor_name FROM patients;')
+    returned_patient = DB.exec('SELECT id, name, cast(dob AS date), doctor_name FROM patients;')
     patients = []
     returned_patient.each() do |patient|
       name = patient.fetch("name")
       dob = patient.fetch("dob")
       doctor_id = patient.fetch("doctor_name").to_i()
-      patients.push(Patient.new({:name => name, :dob => dob, :doctor_id => doctor_id}))
+      id = patient.fetch("id").to_i()
+      patients.push(Patient.new({:name => name, :dob => dob, :doctor_id => doctor_id, :id => id}))
     end
     patients
   end
@@ -40,5 +41,15 @@ class Patient
 
   define_singleton_method(:delete) do |id|
     DB.exec("DELETE FROM patients WHERE id = #{id}")
+  end
+
+  define_singleton_method(:find_doctor_id) do |doctors_id|
+    arr = []
+    Patient.all().each() do |patient|
+      if patient.doctor_id() == doctors_id
+        arr.push(patient)
+      end
+    end
+    arr
   end
 end

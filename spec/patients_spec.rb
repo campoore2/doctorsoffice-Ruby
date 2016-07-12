@@ -1,4 +1,5 @@
 require('spec_helper')
+require('pry')
 
 describe(Patient) do
   describe("#==") do
@@ -30,6 +31,13 @@ describe(Patient) do
       Patient.delete(patient1.id())
       expect(Patient.all()).to(eq([]))
     end
+  end
 
+  describe('#id') do
+    it('sets its ID when you save it') do
+      patient = Patient.new({:name => 'Matt', :dob => '1911-04-03', :doctor_id => 1 })
+      patient.save()
+      expect(patient.id()).to(be_an_instance_of(Fixnum))
+    end
   end
 end
